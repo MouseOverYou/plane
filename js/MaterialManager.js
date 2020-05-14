@@ -24,7 +24,6 @@ function ChangeMaterialProperties() {
             coatMat = mat
             mat.roughness = 0.25
             mat.metallic = 0.25
-            mat.twoSidedLighting = true
 
             //mat.clearCoat.isEnabled = true;
             //mat.clearCoat.intensity = 1; // 0-1 defaults to 1
@@ -40,11 +39,10 @@ function ChangeMaterialProperties() {
             //mat.emissiveColor = new BABYLON.Color3.FromHexString("#FFFFFF")
         }
         else if(mat.name =="glassFront"){
-            mat.alpha = 0
+            mat.alpha = 0.5
             mat.albedoColor = white 
             mat.roughness = 0;
             mat.metallic = 0
-            mat.twoSidedLighting = true
         }
         else if(mat.name == "Car03_Wheel_Mat01"){
             mat.metallic = 1
@@ -115,7 +113,7 @@ function CreateCustomMaterials() {
     colMat.wireframe = true
     colMat.alpha = 0
 
-    var hsText = new BABYLON.Texture("./assets/hotspot.png", scene, true, false)
+    var hsText = new BABYLON.Texture("./assets/hotspot_info.png", scene, true, true)
     HotspotMat = new BABYLON.PBRMaterial("HotspotMat", scene)
     HotspotMat.unlit = true
     HotspotMat.albedoTexture = hsText

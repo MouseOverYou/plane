@@ -109,6 +109,7 @@ function LoadAssets(scene, assetsManager) {
         ChangeMaterialProperties()
         CreateCustomMaterials()
         SpawnHotspots()
+        CreateLighting()
         //CreateColorPicker();
         //AddGlow() 
         //EditMeshes();

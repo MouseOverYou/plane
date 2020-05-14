@@ -1,14 +1,17 @@
 var lightLinks, lightRechts, spotLightL, spotLightR, godrays
 function CreateLighting(){
-    lightLinks = new BABYLON.DirectionalLight("lightLinks", new BABYLON.Vector3(-60, -41, -90), scene);
+    lightLinks = new BABYLON.DirectionalLight("lightLinks", new BABYLON.Vector3(90, 50, 90), scene);
     lightLinks.position = new BABYLON.Vector3(1, 1, 0);
-    lightLinks.intensity = 0
-    lightLinks.shadowMinZ = -13
+    lightLinks.intensity = 2
+    //lightLinks.shadowMinZ = -13
 
-    lightRechts = new BABYLON.DirectionalLight("lightRechts", new BABYLON.Vector3(120, -41, -90), scene);
+    lightRechts = new BABYLON.DirectionalLight("lightRechts", new BABYLON.Vector3(-90, 50, 0), scene);
     lightRechts.position = new BABYLON.Vector3(-1, 1, 0);
-    lightRechts.intensity = 0.0
+    lightRechts.intensity = 2
 
+
+
+/*
     spotLightL = new BABYLON.SpotLight("spotLightL", new BABYLON.Vector3(0.7, 0.75, 2.2), new BABYLON.Vector3(0, 0, 1), 115 * (Math.PI / 180), 2, scene);
     spotLightL.intensity = 250
 
@@ -24,15 +27,6 @@ function CreateLighting(){
     //godrays.weight = 1
     godrays.exposure =0
 
-/*
-
-
-	// By default it uses a billboard to render the sun, just apply the desired texture
-	// position and scale
-	godrays.mesh.material.diffuseTexture = new BABYLON.Texture('assets/sun.png', scene, true, false, BABYLON.Texture.BILINEAR_SAMPLINGMODE);
-	godrays.mesh.material.diffuseTexture.hasAlpha = true;
-	godrays.mesh.position = new BABYLON.Vector3(0.7, 0.75, 2.2);
-	godrays.mesh.scaling = new BABYLON.Vector3(1, 1, 1);
 
 */
 

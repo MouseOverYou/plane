@@ -20,7 +20,7 @@ var createScene = function () {
     camera.panningDistanceLimit = 0;
     camera.pinchToPanMaxDistance = 0;
     camera.panningSensibility = 0
-    camera.lowerRadiusLimit = 4
+    camera.lowerRadiusLimit = 12
     camera.upperRadiusLimit = 25
     camera.upperBetaLimit = 90 * (Math.PI / 180)
     camera.angularSensibilityX = 3000
@@ -55,12 +55,22 @@ var createScene = function () {
         }
     }
 
+    var showUI = false
     scene.onPointerDown = function(){
         
         var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return (mesh.name.startsWith("HS Collider") && mesh.isPickable); });
         if (pickInfo && pickInfo.pickedMesh) {
-            alert(pickInfo.pickedMesh.name);
+
+            //alert(pickInfo.pickedMesh.name);
             CurrentSelection = pickInfo.pickedMesh.name.split('HS Collider ')[1];
+            showUI =! showUI
+            if(showUI){
+                $('#InfoUI').css('display', "block")
+            }
+            else{
+                $('#InfoUI').css('display', "none")
+            }
+
             //console.log(CurrentSelection)
         }
     }
