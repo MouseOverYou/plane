@@ -14,6 +14,11 @@ function handleDebugLayer() {
       }
 }
 
+//Calculate Stuff
+function A_LooksAt_B(A, B) {
+    lookValue = A.position.subtract(B.position);
+    A.rotation.y = -Math.atan2(lookValue.z, lookValue.x) + Math.PI / 2;
+}
 //loading screen
 BABYLON.DefaultLoadingScreen.prototype.displayLoadingUI = function () {
     if (document.getElementById("customLoadingScreenDiv")) {

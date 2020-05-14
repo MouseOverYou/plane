@@ -5,19 +5,19 @@ let showCommands = false
 $(document).keyup(function (e) {
 
 
-  if (e.keyCode === 49 || e.keyCode === 97) {
+  if (e.keyCode === 49) {
     console.log("p Keyboard")
     changeEnv(hdrTexture, 1)
 
   }
 
-  else if (e.keyCode === 50 || e.keyCode === 98) {
+  else if (e.keyCode === 50) {
     console.log("p Keyboard")
     changeEnv(hdrTextureCity, 1)
 
   }
 
-  else if (e.keyCode === 51 || e.keyCode === 99) {
+  else if (e.keyCode === 51) {
     console.log("p Keyboard")
     changeEnv(hdrTextureStudio, 0)
 

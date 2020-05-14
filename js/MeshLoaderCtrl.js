@@ -107,6 +107,8 @@ function LoadAssets(scene, assetsManager) {
     var pbr
     assetsManager.onFinish = function (task) {
         ChangeMaterialProperties()
+        CreateCustomMaterials()
+        SpawnHotspots()
         //CreateColorPicker();
         //AddGlow() 
         //EditMeshes();

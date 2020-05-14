@@ -1,9 +1,9 @@
 
-var canvas = document.getElementById("renderCanvas"); // Get the canvas element 
+var canvas = document.getElementById("renderCanvas"); // Get the canvas element
 var engine = null;
 var scene = null;
 var sceneToRender = null;
-var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
+var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
 
 
 
@@ -22,6 +22,7 @@ var createScene = function () {
     camera.panningSensibility = 0
     camera.lowerRadiusLimit = 4
     camera.upperRadiusLimit = 25
+    camera.upperBetaLimit = 90 * (Math.PI / 180)
     camera.angularSensibilityX = 3000
     camera.angularSensibilityy = 3000
     camera.wheelPrecision = 10
@@ -30,7 +31,7 @@ var createScene = function () {
     var sphereGlass = BABYLON.Mesh.CreateSphere("sphereGlass", 48, 1.5, scene);
     sphereGlass.position.y = 2
     sphereGlass.visibility = 0;
-    
+
     var glass = new BABYLON.PBRMaterial("glass", scene);
     glass.reflectionTexture = hdrTexture;
     glass.refractionTexture = hdrTexture;
@@ -42,16 +43,27 @@ var createScene = function () {
     glass.albedoColor = new BABYLON.Color3(0.85, 0.85, 0.85);
     sphereGlass.material = glass;
 
-    scene.clearColor = new BABYLON.Color3(1,1,1);
-    scene.ambientColor = new BABYLON.Color3(1,1,1);
+    scene.clearColor = new BABYLON.Color3(1, 1, 1);
+    scene.ambientColor = new BABYLON.Color3(1, 1, 1);
 
     //var vrHelper = scene.createDefaultVRExperience({createDeviceOrientationCamera:false});
-    
-    scene.onPointerUp = function () {
+    //Handle Dragging MOuse
+    scene.onPointerMove = function () {
+        //updates rotation of hotspots
+        for (let hs of HS_List) {
+            A_LooksAt_B(hs, camera)
+        }
+    }
 
-        //htmlVideo.play()
-}
-
+    scene.onPointerDown = function(){
+        
+        var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return (mesh.name.startsWith("HS Collider") && mesh.isPickable); });
+        if (pickInfo && pickInfo.pickedMesh) {
+            alert(pickInfo.pickedMesh.name);
+            CurrentSelection = pickInfo.pickedMesh.name.split('HS Collider ')[1];
+            //console.log(CurrentSelection)
+        }
+    }
     return scene;
 };
 /******* End of the create scene function ******/
@@ -67,7 +79,7 @@ engine.runRenderLoop(function () {
     if (sceneToRender) {
         sceneToRender.render();
     }
-    if(UpdateAnimRate){
+    if (UpdateAnimRate) {
         AnimRate += 0.01
         TurnLightsOn(AnimRate)
         console.log(AnimRate)

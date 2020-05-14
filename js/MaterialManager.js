@@ -109,11 +109,19 @@ function scaleText(text, uValue, vValue, strength){
     text.level = strength
 }
 
-var colMat
+var colMat, HotspotMat
 function CreateCustomMaterials() {
     colMat = new BABYLON.StandardMaterial("colMat", scene)
-    colMat.wireframe = false
+    colMat.wireframe = true
     colMat.alpha = 0
+
+    var hsText = new BABYLON.Texture("./assets/hotspot.png", scene, true, false)
+    HotspotMat = new BABYLON.PBRMaterial("HotspotMat", scene)
+    HotspotMat.unlit = true
+    HotspotMat.albedoTexture = hsText
+    HotspotMat.opacityTexture = hsText
+
+    
 }
 
 function createVideoMat() {

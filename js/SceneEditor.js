@@ -122,3 +122,18 @@ function ChangeEnvMesh(vis){
 
 
 }
+
+var Hotspot_P
+var HS_List = []
+function SpawnHotspots(){
+    Hotspot_P = new BABYLON.TransformNode("Hotspot_P",scene)
+    var hs = new Hotspot("1", new BABYLON.Vector3(-5, 2.2, 0.3))
+    HS_List.push(hs.Mesh);
+    var hs2 = new Hotspot("2", new BABYLON.Vector3(0, 3.2, -7))
+    HS_List.push(hs2.Mesh);
+   
+}
+
+function sayHello(){
+    console.log("hello")
+}
