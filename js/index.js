@@ -44,7 +44,7 @@ var createScene = function () {
     glass.albedoColor = new BABYLON.Color3(0.85, 0.85, 0.85);
     sphereGlass.material = glass;
 
-    scene.clearColor = new BABYLON.Color3(1, 0, 0);
+    scene.clearColor = new BABYLON.Color3(1, 1, 1);
     scene.ambientColor = new BABYLON.Color3(1, 1, 1);
     BGDefault = scene.createDefaultEnvironment({
         groundColor: new BABYLON.Color3(1, 1, 1),
@@ -115,7 +115,7 @@ var createScene = function () {
             }
             else {
                 document.getElementById("infobox-video").style.opacity = "0"
-                document.getElementById("infobox-video").style.right = "0px"
+                document.getElementById("infobox-video").style.right = "-400px"
             }
 
             //console.log(CurrentSelection)

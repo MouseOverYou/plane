@@ -14,14 +14,14 @@
     width: 400px;
     height: 600px;
     position: absolute;
-    right: 0px;
+    right: -400px;
     top: 60px;
     background-color: #353A40;
     background-image: url(../assets/dot_grid.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: auto;
-    opacity:0;
+    opacity:1;
     -webkit-transition: all .5s ease;
 	-moz-transition: all .5s ease;
 	-ms-transition: all .5s ease;
@@ -137,8 +137,14 @@ p{
 
 
 
-#infodox-bild{
+#infobox-bild{
     display: block;
+    pointer-events: none;
+}
+
+#infobox-video{
+    display: block;
+    pointer-events: none;
 }
 
 
