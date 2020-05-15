@@ -5,7 +5,8 @@ var scene = null;
 var sceneToRender = null;
 var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
 
-
+var BGDefault
+var currentWorld = "plane"
 
 /******* Add the create scene function ******/
 var createScene = function () {
@@ -43,34 +44,76 @@ var createScene = function () {
     glass.albedoColor = new BABYLON.Color3(0.85, 0.85, 0.85);
     sphereGlass.material = glass;
 
-    scene.clearColor = new BABYLON.Color3(1, 1, 0);
+    scene.clearColor = new BABYLON.Color3(1, 0, 0);
     scene.ambientColor = new BABYLON.Color3(1, 1, 1);
-    //scene.createDefaultEnvironment();
+    BGDefault = scene.createDefaultEnvironment({
+        groundColor: new BABYLON.Color3(1, 1, 1),
+        skyboxColor: new BABYLON.Color3(1, 1, 1)
+
+    });
+    BGDefault.skybox.setEnabled(false)
 
     //var vrHelper = scene.createDefaultVRExperience({createDeviceOrientationCamera:false});
     //Handle Dragging MOuse
+
     scene.onPointerMove = function () {
         //updates rotation of hotspots
-        for (let hs of HS_List) {
-            A_LooksAt_B(hs, camera)
+        if (currentWorld == "plane") {
+            for (let hs of HsPLaneList) {
+                A_LooksAt_B(hs, camera)
+            }
         }
+
+        else if (currentWorld == "turbine") {
+
+            for (let hs of HsTurbineList) {
+                A_LooksAt_B(hs, camera)
+            }
+        }
+
     }
 
     var showUI = false
-    scene.onPointerDown = function(){
-        
+    scene.onPointerDown = function () {
+
         var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return (mesh.name.startsWith("HS Collider") && mesh.isPickable); });
         if (pickInfo && pickInfo.pickedMesh) {
 
             //alert(pickInfo.pickedMesh.name);
             CurrentSelection = pickInfo.pickedMesh.name.split('HS Collider ')[1];
-            showUI =! showUI
-            if(showUI){
+            //alert(CurrentSelection)
+            switch (CurrentSelection) {
+                case "0":
+                    showUI = !showUI
+                    break;
+
+                case "1":
+                    ManageWorlds("turbine");
+                    break;
+
+                case "2":
+                    showUI = !showUI
+                    break;
+
+                case "3":
+                    showUI = !showUI
+                    break;
+
+                case "4":
+                    ManageWorlds("plane");
+                    break;
+
+                case "5":
+                    showUI = !showUI
+                    break;
+            }
+
+            if (showUI) {
                 //$('#InfoUI').css('display', "block")
                 document.getElementById("infobox-video").style.opacity = "1"
                 document.getElementById("infobox-video").style.right = "60px"
             }
-            else{
+            else {
                 document.getElementById("infobox-video").style.opacity = "0"
                 document.getElementById("infobox-video").style.right = "0px"
             }
@@ -92,12 +135,16 @@ let AnimRate = 0
 engine.runRenderLoop(function () {
     if (sceneToRender) {
         sceneToRender.render();
+        var fpsLabel = document.getElementById("fpsLabel");
+        fpsLabel.innerHTML = engine.getFps().toFixed() + " fps";
     }
+    /*
     if (UpdateAnimRate) {
         AnimRate += 0.01
         TurnLightsOn(AnimRate)
         console.log(AnimRate)
     }
+    */
 });
 
 // Resize

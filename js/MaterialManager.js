@@ -44,9 +44,9 @@ function ChangeMaterialProperties() {
             mat.roughness = 0;
             mat.metallic = 0
         }
-        else if(mat.name == "Car03_Wheel_Mat01"){
+        else if(mat.name == "TurbineMetal"){
             mat.metallic = 1
-            mat.roughness = 0.2
+            mat.roughness = 0.4
 
         }
         else if(mat.name == "Car03_Interior_Mat01"){
@@ -106,17 +106,23 @@ function scaleText(text, uValue, vValue, strength){
     text.level = strength
 }
 
-var colMat, HotspotMat
+var colMat, HotspotMat, HotspotInfoMat
 function CreateCustomMaterials() {
     colMat = new BABYLON.StandardMaterial("colMat", scene)
     colMat.wireframe = true
     colMat.alpha = 0
 
-    var hsText = new BABYLON.Texture("./assets/hotspot_info.png", scene, true, true)
+    var hsInfoText = new BABYLON.Texture("./assets/hotspot_info.png", scene, true, true)
+    var hsText = new BABYLON.Texture("./assets/hotspot.png", scene, true, true)
     HotspotMat = new BABYLON.PBRMaterial("HotspotMat", scene)
     HotspotMat.unlit = true
     HotspotMat.albedoTexture = hsText
     HotspotMat.opacityTexture = hsText
+
+    HotspotInfoMat = new BABYLON.PBRMaterial("HotspotInfoMat", scene)
+    HotspotInfoMat.unlit = true
+    HotspotInfoMat.albedoTexture = hsInfoText
+    HotspotInfoMat.opacityTexture = hsInfoText
 
     
 }

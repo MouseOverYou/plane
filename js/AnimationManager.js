@@ -22,3 +22,29 @@ function TurnLightsOn(rate) {
         AnimRate = 0;
     }
 }
+
+var TurbineAnim = gsap.timeline({paused:true});
+
+var startPos = []
+function BufferMachineAnimation(){
+
+    var rateZ = 100
+    var c = 0
+    for (let elem of TurbineParts){
+
+        startPos.push(elem.position.x)
+        TurbineAnim.fromTo(elem.position, {x: startPos[c]}, {x:startPos[c]-rateZ, ease: "power2.out", duration: 1}, "<");
+        rateZ = rateZ - 5
+        c++
+    }
+}
+
+function ResetTurbine(){
+    var c = 0
+    for (let elem of TurbineParts){
+
+        elem.position.x = startPos[c]
+        c++
+    }
+
+}

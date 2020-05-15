@@ -1,6 +1,7 @@
-var Car_P, Roof_P
+var Plane_P, Roof_P
 var hdrTexture, hdrTextureCity, hdrTextureStudio, hdrSkyboxMaterial, hdrSkybox, CanyonEnvTask, CityEnvTask, StudioEnvTask
-var MesseCollidersLoaderTask, BottleLoaderTask
+var TurbineLoaderTask, Turbine_P
+var TurbineParts = []
 
 function LoadAssets(scene, assetsManager) {
 
@@ -61,22 +62,49 @@ function LoadAssets(scene, assetsManager) {
     }
 
 
-    Car_P = new BABYLON.TransformNode("Car_P");
-    MesseLoaderTask = assetsManager.addMeshTask("", "", "./assets/airbus320ToWeb.glb")
+    Plane_P = new BABYLON.TransformNode("Plane_P");
+    PlaneLoaderTask = assetsManager.addMeshTask("", "", "./assets/airbus320ToWeb.glb")
 
-    MesseLoaderTask.onSuccess = function (task) {
+    PlaneLoaderTask.onSuccess = function (task) {
 
         task.loadedMeshes[0].position.x = 0
         task.loadedMeshes[0].position.y = 0.001
         task.loadedMeshes[0].position.z = 0
         task.loadedMeshes[0].scaling = new BABYLON.Vector3(0.05, 0.05, 0.05)
-        task.loadedMeshes[0].parent = Car_P
-        Car_P.position.x = 0
-        Car_P.position.y = 0
+        task.loadedMeshes[0].parent = Plane_P
+        Plane_P.position.x = 0
+        Plane_P.position.y = 0
 
     }
 
-    MesseLoaderTask.onError = function (task, message, exception) {
+    PlaneLoaderTask.onError = function (task, message, exception) {
+        console.log(message, exception);
+    }
+
+    Turbine_P = new BABYLON.TransformNode("Turbine_P");
+    TurbineLoaderTask = assetsManager.addMeshTask("", "", "./assets/Turbine.glb")
+
+    TurbineLoaderTask.onSuccess = function (task) {
+
+        task.loadedMeshes[0].position.x = 0
+        task.loadedMeshes[0].position.y = 0
+        task.loadedMeshes[0].position.z = 0
+        task.loadedMeshes[0].rotationQuaternion = null;
+        task.loadedMeshes[0].rotation.y = 0 * (Math.PI / 180)
+        task.loadedMeshes[0].scaling = new BABYLON.Vector3(0.1, 0.1, 0.1)
+        task.loadedMeshes[0].parent = Turbine_P
+
+        Turbine_P.position.y = 2
+        Turbine_P.setEnabled(false)
+
+        console.log(task.loadedMeshes[0]._children[0])
+        task.loadedMeshes[0]._children[0].getChildTransformNodes(true).forEach(elem => {
+            TurbineParts.push(elem);
+        });
+
+    }
+
+    TurbineLoaderTask.onError = function (task, message, exception) {
         console.log(message, exception);
     }
 
@@ -111,6 +139,7 @@ function LoadAssets(scene, assetsManager) {
         SpawnHotspots()
         CreateLighting()
         EditMeshes()
+        BufferMachineAnimation()
         //CreateColorPicker();
         //AddGlow() 
         //EditMeshes();
