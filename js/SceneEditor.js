@@ -34,13 +34,11 @@ function CreateLighting(){
 
 let LightMesh
 function EditMeshes(){
+    //scene.getMeshByName("BackgroundPlane").position.y=-1.5
     scene.meshes.forEach(mesh => {
-        if(mesh.name == "Car03_CollisionMesh"){
-            //mesh.isVisible = false
-            //console.log(mesh)
-        }
-        if(mesh.name == "Car03_Lights_HeadLight"){
-            LightMesh = mesh
+        //console.log(mesh.name)
+        if(mesh.name == "BackgroundPlane"){
+            mesh.position.y = -1.5
         }
     });
 }
@@ -130,4 +128,8 @@ function SpawnHotspots(){
 
 function sayHello(){
     console.log("hello")
+}
+
+function SecondWorld(){
+
 }

@@ -14,7 +14,7 @@ function ChangeMaterialProperties() {
 
     let sceneMats = scene.materials;
     for (let mat of sceneMats) {
-        if (mat.name == "hdrSkyBox" ) {
+        if (mat.name == "hdrSkyBox" || mat.name == "BackgroundSkyboxMaterial" || mat.name =="BackgroundPlaneMaterial") {
             continue;
         }
 
@@ -80,7 +80,6 @@ function ChangeMaterialProperties() {
             textAlpha.getAlphaFromRGB = true
             mat.opacityTexture = textAlpha
             mat.unlit = true
- 
         }
     }
 
@@ -90,7 +89,7 @@ function ChangeMaterialProperties() {
 function UpdateEnvReflections(hdr){
     let sceneMats = scene.materials;
     for (let mat of sceneMats) {
-        if (mat.name == "hdrSkyBox" ) {
+        if (mat.name == "hdrSkyBox" || mat.name == "BackgroundSkyboxMaterial" || mat.name =="BackgroundPlaneMaterial") {
             continue;
         }
 

@@ -43,8 +43,9 @@ var createScene = function () {
     glass.albedoColor = new BABYLON.Color3(0.85, 0.85, 0.85);
     sphereGlass.material = glass;
 
-    scene.clearColor = new BABYLON.Color3(1, 1, 1);
+    scene.clearColor = new BABYLON.Color3(1, 1, 0);
     scene.ambientColor = new BABYLON.Color3(1, 1, 1);
+    //scene.createDefaultEnvironment();
 
     //var vrHelper = scene.createDefaultVRExperience({createDeviceOrientationCamera:false});
     //Handle Dragging MOuse
@@ -65,10 +66,13 @@ var createScene = function () {
             CurrentSelection = pickInfo.pickedMesh.name.split('HS Collider ')[1];
             showUI =! showUI
             if(showUI){
-                $('#InfoUI').css('display', "block")
+                //$('#InfoUI').css('display', "block")
+                document.getElementById("infobox-video").style.opacity = "1"
+                document.getElementById("infobox-video").style.right = "60px"
             }
             else{
-                $('#InfoUI').css('display', "none")
+                document.getElementById("infobox-video").style.opacity = "0"
+                document.getElementById("infobox-video").style.right = "0px"
             }
 
             //console.log(CurrentSelection)
