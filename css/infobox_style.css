@@ -45,6 +45,7 @@
     background-color: #000;
     overflow: hidden;
     text-align: center;
+    pointer-events: auto;
 }
 
 .content-box{
